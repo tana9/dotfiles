@@ -65,7 +65,7 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'https://github.com/tomasr/molokai'
 "NeoBundle 'https://github.com/istepure/vim-toolbar-icons-silk'
 "Python
-NeoBundle 'davidhalter/jedi-vim'
+"NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'kevinw/pyflakes-vim'
 NeoBundle 'nvie/vim-flake8'
 
@@ -145,11 +145,12 @@ source $VIMRUNTIME/macros/matchit.vim
 " FileType
 "==========================================
 "autocmd FileType php :set dictionary=$HOME/.vim/dict/wordpress.dict
-autocmd FileType perl,cgi :compiler perl
-au BufNewFile,BufRead *.ps1 setf ps1
-autocmd Filetype ps1 set ts=4 sw=4 autoindent
+autocmd! FileType perl,cgi :compiler perl
+autocmd! BufNewFile,BufRead *.ps1 setf ps1
+autocmd! Filetype ps1 setlocal ts=4 sw=4 autoindent
+autocmd! Filetype html setlocal ts=2 sw=2 autoindent
 "markdown
-autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd! BufNewFile,BufRead *.md set filetype=markdown
 "typescript
 "au BufNewFile,BufRead *.ts setf ts
 
@@ -279,6 +280,8 @@ let howm_fileformat      = 'dos'
 let g:qfixmemo_syntax = 3
 " let QFixHowm_FileType = 'qfix_memo'
 let QFixHowm_FileType = 'markdown'
+let QFixHowm_Title = '#'
+set noundofile "undoƒtƒ@ƒCƒ‹‚ð–³Œø‚É‚·‚é
 
 "===========================================
 " VimOrgnizer
@@ -370,8 +373,8 @@ if filereadable(expand('~/_vimrc.local'))
 endif
 
 "Python
-let g:jedi#popup_select_first = 0
-autocmd FileType python setlocal completeopt-=preview
+"let g:jedi#popup_select_first = 0
+"autocmd FileType python setlocal completeopt-=preview
 
 "neocomplete
 let g:neocomplete#enable_at_startup = 1
@@ -409,9 +412,9 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 " Close popup by <Space>.
 inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
-autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#popup_select_first=0
-let g:jedi#auto_vim_configuration=0
+"autocmd FileType python setlocal omnifunc=jedi#completions
+"let g:jedi#popup_select_first=0
+"let g:jedi#auto_vim_configuration=0
 if !exists('g:neocomplete#force_omni_input_patterns')
         let g:neocomplete#force_omni_input_patterns = {}
 endif
