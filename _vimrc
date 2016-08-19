@@ -1,77 +1,55 @@
 "echo "_vimrc"
 "===========================================
-" neobundle
+" dein
 "===========================================
-set nocompatible
-if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
+if &compatible
+    setnocompatible
 endif
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-" Use https protocol over proxy.
-" let g:neobundle#types#git#default_protocol = 'https'
-call neobundle#begin(expand('~/.vim/bundle/'))
+call dein#begin(expand('~/.vim/dein'))
 
-" Let neobundle manage neobundle
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Use neobundle standard recipes.
-NeoBundle 'Shougo/neobundle-vim-scripts'
-
-"" 使いたいプラグインのリポジトリを羅列。Subversion とか Mercurial で
-"" もいけるらしい。
-NeoBundle 'https://github.com/Shougo/unite.vim.git'
-"NeoBundle 'https://github.com/Shougo/vimproc.git'
-NeoBundle 'https://github.com/Shougo/vimshell.git'
-NeoBundle 'https://github.com/Shougo/vimfiler.git'
-NeoBundle 'https://github.com/Shougo/neocomplete.git'
-NeoBundle 'EnhCommentify.vim'
-"NeoBundle 'neocomplcache'
-NeoBundle 'surround.vim'
-NeoBundle 'changelog'
-NeoBundle 'https://github.com/fuenor/qfixhowm.git'
-NeoBundle 'https://github.com/vim-scripts/YankRing.vim.git'
-NeoBundle 'https://github.com/kien/ctrlp.vim.git'
-NeoBundle 'https://github.com/thinca/vim-singleton.git'
-NeoBundle 'Align'
-NeoBundle 'smartchr'
-NeoBundle 'hsitz/VimOrganizer'
-NeoBundle 'chrisbra/NrrwRgn.git'
-NeoBundle 'calendar.vim'
-NeoBundle 'vim-jp/vimdoc-ja'
-NeoBundle 'mattn/vimplenote-vim'
-NeoBundle 'mattn/webapi-vim'
-"NeoBundle 'https://github.com/vim-scripts/Align.vim.git'
-"NeoBundle 'Vimball'
-"NeoBundle 'https://github.com/thinca/vim-quickrun.git'
-"NeoBundle 'https://github.com/jelera/vim-javascript-syntax.git'
-"NeoBundle 'https://github.com/pangloss/vim-javascript.git'
-"NeoBundle 'http://github.com/othree/html5.vim.git'
-"NeoBundle 'http://github.com/PProvost/vim-ps1.git'
-"NeoBundle 'http://github.com/yuruyoro/monday.vim'
-"NeoBundle 'https://github.com/tyru/open-browser.vim.git'
-"NeoBundle 'http://github.com/h1mesuke/unite-outline.git'
-"NeoBundle 'https://github.com/mattn/mkdpreview-vim'
-"NeoBundle 'http://github.com/davidoc/taskpaper.vim.git'
-"NeoBundle 'vimwiki'
-"NeoBundle 'https://github.com/glidenote/memolist.vim.git'
-"NeoBundle 'https://github.com/vim-jp/vital.vim'
-NeoBundle 'gh:itchyny/lightline.vim.git', {
-      \ 'gui' : 1
-       \ }
-NeoBundle 'https://github.com/nanotech/jellybeans.vim.git'
-NeoBundle 'https://github.com/w0ng/vim-hybrid.git'
-NeoBundle 'https://gist.github.com/3278077.git'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'https://github.com/tomasr/molokai'
-"NeoBundle 'https://github.com/istepure/vim-toolbar-icons-silk'
+call dein#add('Shougo/dein.vim')
+"call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+call dein#add('Shougo/neocomplete.vim')
+call dein#add('Shougo/neomru.vim')
+call dein#add('Shougo/neosnippet')
+call dein#add('Shougo/unite.vim.git')
+call dein#add('Shougo/vimfiler.git')
+call dein#add('Shougo/vimshell.git')
+call dein#add('calendar.vim')
+call dein#add('vim-jp/vimdoc-ja')
+call dein#add('EnhCommentify.vim')
+call dein#add('surround.vim')
+call dein#add('changelog')
+call dein#add('fuenor/qfixhowm.git')
+call dein#add('LeafCage/yankround.vim')
+call dein#add('kien/ctrlp.vim.git')
+call dein#add('thinca/vim-singleton.git')
+call dein#add('Align')
+call dein#add('smartchr')
+call dein#add('hsitz/VimOrganizer')
+call dein#add('chrisbra/NrrwRgn.git')
+"call dein#add('mattn/vimplenote-vim')
+call dein#add('mattn/webapi-vim')
+call dein#add('https://gist.github.com/3278077.git')
+call dein#add('nathanaelkane/vim-indent-guides')
+"Theme
+call dein#add('itchyny/lightline.vim')
+call dein#add('tomasr/molokai')
+call dein#add('nanotech/jellybeans.vim.git')
+call dein#add('w0ng/vim-hybrid.git')
 "Python
-"NeoBundle 'davidhalter/jedi-vim'
-NeoBundle 'kevinw/pyflakes-vim'
-NeoBundle 'nvie/vim-flake8'
+call dein#add('davidhalter/jedi-vim')
+call dein#add('kevinw/pyflakes-vim')
+call dein#add('nvie/vim-flake8')
+"Golang
+call dein#add('vim-jp/vim-go-extra')
+call dein#add('fatih/vim-go')
+
+call dein#end()
 
 filetype plugin indent on
-call neobundle#end()
-NeoBundleCheck
 
 " 複数起動禁止
 "call singleton#enable()
@@ -96,16 +74,6 @@ set shiftwidth=4
 "Tab可視化
 set list
 set listchars=tab:>-,trail:･,extends:>,precedes:<,nbsp:%
-"hi NonText guibg=NONE guifg=Gray40
-"hi SpecialKey guibg=NONE guifg=Gray40
-" 全角スペース表示
-augroup highlightIdegraphicSpace
-    autocmd!
-    autocmd ColorScheme * highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=Gray40
-    autocmd VimEnter,WinEnter * match IdeographicSpace /　/
-"    autocmd ColorScheme * highlight SpecialKey guibg=NONE guifg=Gray40
-"    autocmd ColorScheme * highlight NonText    guibg=NONE guifg=Gray40
-augroup END
 
 " StatusLine
 set laststatus=2 "常にステータス行を表示
@@ -130,22 +98,15 @@ set noshellslash
 "matchit.vim 有効化
 source $VIMRUNTIME/macros/matchit.vim
 
-"==========================================
-" lightline
-"==========================================
-"let g:lightline.colorscheme = 'default'
-"let g:lightline.colorscheme = 'jellybeans'
 
 "==========================================
 " vim-indent-guide
 "==========================================
-"IndentGuideEnable
+IndentGuideEnable
 
 "==========================================
 " FileType
 "==========================================
-"autocmd FileType php :set dictionary=$HOME/.vim/dict/wordpress.dict
-autocmd! FileType perl,cgi :compiler perl
 autocmd! BufNewFile,BufRead *.ps1 setf ps1
 autocmd! Filetype ps1 setlocal ts=4 sw=4 autoindent
 autocmd! Filetype html setlocal ts=2 sw=2 autoindent
@@ -153,7 +114,6 @@ autocmd! Filetype html setlocal ts=2 sw=2 autoindent
 autocmd! BufNewFile,BufRead *.md set filetype=markdown
 "typescript
 "au BufNewFile,BufRead *.ts setf ts
-
 
 "==========================================
 " KeyMap
@@ -241,26 +201,12 @@ let g:unite_kind_file_use_trashbox = 1
 " QuricRun
 "===========================================
 let g:quickrun_config = {}
-"let g:quickrun_config['markdown'] = {
-"            \ 'type': 'markdown/kramdown',
-"            \ 'cmdopt': '-s',
-"            \ 'outputter': 'browser'
-"            \ }
-"let g:quickrun_config['markdown'] = {
-"            \ 'type': 'markdown/kramdown',
-"            \ 'command': 'D://Ruby193//bin//kramdown',
-"            \ 'outputter': 'browser',
-"            \ }
 let g:quickrun_config['markdown']= {
-			\ 'type': 'markdown/pandoc',
-			\ 'command': 'D://Program Files//Pandoc//bin/pandoc.exe',
-			\ 'cmdopt': '-s',
-			\ 'outputter': 'browser'
-			\ }
-"let g:quickrun_config['markdown']= {
-"      \ 'outputter': 'browser'
-"      \ }
-
+            \ 'type': 'markdown/pandoc',
+            \ 'command': 'D://Program Files//Pandoc//bin/pandoc.exe',
+            \ 'cmdopt': '-s',
+            \ 'outputter': 'browser'
+            \ }
 
 "===========================================
 " qfixhowm
@@ -284,14 +230,6 @@ let QFixHowm_Title = '#'
 set noundofile "undoファイルを無効にする
 
 "===========================================
-" VimOrgnizer
-"===========================================
-filetype plugin indent on
-" and then put these lines in vimrc somewhere after the line above
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
-au BufEnter *.org            call org#SetOrgFileType()
-
-"===========================================
 " ctrlp
 "===========================================
 let g:ctrlp_map = '<c-p>'
@@ -299,15 +237,6 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_use_migemo = 1
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-
-"===========================================
-" VimOrgnizer
-"===========================================
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
-au BufEnter *.org            call org#SetOrgFileType()
-let g:org_command_for_emacsclient = 'D:\Soft\emacs-24.2\bin\emacsclientw.exe'
-let g:org_agenda_select_dirs=["~/.vim_junk/org_files"]
-let g:org_agenda_files = split(glob("~/.vim_junk/org_files/*.org"),"\n")
 
 "===========================================
 " unite
@@ -342,28 +271,23 @@ nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
 "uniteを開いている間のキーマッピング
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()"{{{
-	"ESCでuniteを終了
-	nmap <buffer> <ESC> <Plug>(unite_exit)
-	"入力モードのときjjでノーマルモードに移動
-	imap <buffer> jj <Plug>(unite_insert_leave)
-	"入力モードのときctrl+wでバックスラッシュも削除
-	imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
-	"ctrl+jで縦に分割して開く
-	nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-	inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-	"ctrl+jで横に分割して開く
-	nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-	inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-	"ctrl+oでその場所に開く
-	nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
-	inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
+    "ESCでuniteを終了
+    nmap <buffer> <ESC> <Plug>(unite_exit)
+    "入力モードのときjjでノーマルモードに移動
+    imap <buffer> jj <Plug>(unite_insert_leave)
+    "入力モードのときctrl+wでバックスラッシュも削除
+    imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
+    "ctrl+jで縦に分割して開く
+    nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+    inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+    "ctrl+jで横に分割して開く
+    nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+    inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+    "ctrl+oでその場所に開く
+    nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
+    inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
 endfunction"}}}
 
-"===========================================
-" vimplenote-vim
-"===========================================
-let g:VimpleNoteUsername = "m@tana9.net"
-let g:VimpleNotePassword = "tana9ara"
 
 "===========================================
 " 端末毎のvim設定
@@ -397,9 +321,9 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  " return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+    " return neocomplete#close_popup() . "\<CR>"
+    " For no inserting <CR> key.
+    return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -412,11 +336,8 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 " Close popup by <Space>.
 inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
-"autocmd FileType python setlocal omnifunc=jedi#completions
-"let g:jedi#popup_select_first=0
-"let g:jedi#auto_vim_configuration=0
 if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
+    let g:neocomplete#force_omni_input_patterns = {}
 endif
 
 " let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
@@ -425,6 +346,19 @@ let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 "let g:jedi#auto_vim_configuration = 0
 "let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
+"==========================================
+"GO
+"==========================================
+let g:go_bin_path = expand("~/.go/bin")
 
-
-let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+"==========================================
+"YankRing.vim
+"==========================================
+nmap p <Plug>(yankround-p)
+xmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap gp <Plug>(yankround-gp)
+xmap gp <Plug>(yankround-gp)
+nmap gP <Plug>(yankround-gP)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
